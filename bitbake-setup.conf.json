@@ -66,9 +66,8 @@
                     }
                 },
 
-                "notes": [
-                    "After init, add the following to build/conf/local.conf:",
-                    "DISTRO_FEATURES:append = \" acl xattr pam selinux\""
+                "oe-fragments": [
+                    "selinux-demo/selinux-features"
                 ]
             }
         ]
