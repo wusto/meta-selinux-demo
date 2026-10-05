@@ -23,6 +23,7 @@ bitbake core-image-selinux-demo
 ```
 runqemu snapshot nographic
 ```
+* login as root and pw 1234
 * Execute alice
 ```
 echo "hello" > /tmp/hello.txt
