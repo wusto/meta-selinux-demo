@@ -14,6 +14,7 @@ bitbake-setup init --non-interactive <THIS-DIR>/bitbake-setup.conf.json selinux-
 ```
 * Build the image
 ```
+. ./bitbake-builds/oe-nodistro-wrynose/build/init-build-env
 bitbake core-image-selinux-demo
 ```
 
