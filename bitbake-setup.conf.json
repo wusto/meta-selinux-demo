@@ -1,0 +1,76 @@
+{
+    "description": "Reproducible bitbake-setup configuration for the SELinux demo build (based on OpenEmbedded 'nodistro', release 6.0 'wrynose')",
+    "version": "1.0",
+
+    "sources": {
+        "bitbake": {
+            "git-remote": {
+                "uri": "https://git.openembedded.org/bitbake",
+                "branch": "2.18",
+                "rev": "2.18"
+            }
+        },
+        "openembedded-core": {
+            "git-remote": {
+                "uri": "https://git.openembedded.org/openembedded-core",
+                "branch": "wrynose",
+                "rev": "wrynose"
+            }
+        },
+        "meta-openembedded": {
+            "git-remote": {
+                "uri": "https://git.openembedded.org/meta-openembedded",
+                "branch": "wrynose",
+                "rev": "wrynose"
+            }
+        },
+        "meta-selinux": {
+            "git-remote": {
+                "uri": "https://git.yoctoproject.org/meta-selinux",
+                "branch": "wrynose",
+                "rev": "wrynose"
+            }
+        },
+        "meta-selinux-demo": {
+            "git-remote": {
+                "uri": "https://github.com/wusto/meta-selinux-demo",
+                "branch": "main",
+                "rev": "main"
+            }
+        }
+    },
+
+    "bitbake-setup": {
+        "configurations": [
+            {
+                "name": "selinux-demo",
+                "description": "SELinux demo distro with unconfined single-user policy and demo application",
+                "setup-dir-name": "oe-nodistro-wrynose",
+
+                "bb-layers": [
+                    "openembedded-core/meta",
+                    "meta-selinux",
+                    "meta-openembedded/meta-oe",
+                    "meta-openembedded/meta-python",
+                    "meta-selinux-demo"
+                ],
+
+                "oe-fragments-one-of": {
+                    "machine": {
+                        "description": "Target machines",
+                        "options": [
+                            { "name": "machine/qemux86-64", "description": "x86-64 system on QEMU" },
+                            { "name": "machine/qemuarm64", "description": "ARMv8 system on QEMU" },
+                            { "name": "machine/qemuriscv64", "description": "RISC-V system on QEMU" }
+                        ]
+                    }
+                },
+
+                "notes": [
+                    "After init, add the following to build/conf/local.conf:",
+                    "DISTRO_FEATURES:append = \" acl xattr pam selinux\""
+                ]
+            }
+        ]
+    }
+}
