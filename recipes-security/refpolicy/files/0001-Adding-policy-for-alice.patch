@@ -1,0 +1,73 @@
+From 4e88bfcaf21f6383797c2fafb17d420ce8d005c9 Mon Sep 17 00:00:00 2001
+From: Tobias Kaufmann <Tobias.KA.Kaufmann@bmw.de>
+Date: Mon, 21 Sep 2026 08:08:59 +0000
+Subject: [PATCH] Adding policy for Alice
+
+Upstream-Status: Inappropriate [embedded specific]
+---
+ policy/modules/apps/alice.fc     | 0
+ policy/modules/apps/alice.if     | 1 +
+ policy/modules/apps/alice.te     | 5 +++++
+ policy/modules/apps/alice_ref.fc | 1 +
+ policy/modules/apps/alice_ref.if | 1 +
+ policy/modules/apps/alice_ref.te | 7 +++++++
+ 6 files changed, 15 insertions(+)
+ create mode 100644 policy/modules/apps/alice.fc
+ create mode 100644 policy/modules/apps/alice.if
+ create mode 100644 policy/modules/apps/alice.te
+ create mode 100644 policy/modules/apps/alice_ref.fc
+ create mode 100644 policy/modules/apps/alice_ref.if
+ create mode 100644 policy/modules/apps/alice_ref.te
+
+diff --git a/policy/modules/apps/alice.fc b/policy/modules/apps/alice.fc
+new file mode 100644
+index 000000000..e69de29bb
+diff --git a/policy/modules/apps/alice.if b/policy/modules/apps/alice.if
+new file mode 100644
+index 000000000..d79cdac6e
+--- /dev/null
++++ b/policy/modules/apps/alice.if
+@@ -0,0 +1 @@
++## <summary>Policy for the alice demo application.</summary>
+diff --git a/policy/modules/apps/alice.te b/policy/modules/apps/alice.te
+new file mode 100644
+index 000000000..b516a24ab
+--- /dev/null
++++ b/policy/modules/apps/alice.te
+@@ -0,0 +1,5 @@
++policy_module(alice, 0.0.1)
++
++type alice_t;
++
++role system_r types alice_t;
+diff --git a/policy/modules/apps/alice_ref.fc b/policy/modules/apps/alice_ref.fc
+new file mode 100644
+index 000000000..a3f9fff6b
+--- /dev/null
++++ b/policy/modules/apps/alice_ref.fc
+@@ -0,0 +1 @@
++/usr/bin/alice	--	gen_context(system_u:object_r:alice_ref_exec_t,s0)
+diff --git a/policy/modules/apps/alice_ref.if b/policy/modules/apps/alice_ref.if
+new file mode 100644
+index 000000000..213bb9ee8
+--- /dev/null
++++ b/policy/modules/apps/alice_ref.if
+@@ -0,0 +1 @@
++## <summary>Policy for the alice_ref demo application.</summary>
+diff --git a/policy/modules/apps/alice_ref.te b/policy/modules/apps/alice_ref.te
+new file mode 100644
+index 000000000..8afbbd0be
+--- /dev/null
++++ b/policy/modules/apps/alice_ref.te
+@@ -0,0 +1,7 @@
++policy_module(alice_ref, 0.0.1)
++
++type alice_ref_t;
++type alice_ref_exec_t;
++
++init_daemon_domain(alice_ref_t, alice_ref_exec_t)
++read_files_pattern(alice_ref_t, tmp_t, user_tmp_t)
++
+-- 
+2.34.1
+
